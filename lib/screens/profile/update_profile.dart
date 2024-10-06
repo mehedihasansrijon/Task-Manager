@@ -24,6 +24,20 @@ class _UpdateProfileState extends State<UpdateProfile> {
   bool _isLoading = false;
 
   @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  void _loadProfileData() async {
+    _emailTextEdit.text = (await readUserData('email')) ?? '';
+    _firstNameTextEdit.text = (await readUserData('firstName')) ?? '';
+    _lastNameTextEdit.text = (await readUserData('lastName')) ?? '';
+    _mobileTextEdit.text = (await readUserData('mobile')) ?? '';
+    _passwordTextEdit.text = (await readUserData('password')) ?? '';
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: TMAppBar(
@@ -89,6 +103,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       bottomLeft: Radius.circular(8),
                     ),
                   ),
+                  alignment: Alignment.center,
                   child: const Text(
                     "Photo",
                     style: TextStyle(
@@ -97,7 +112,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       color: Colors.white,
                     ),
                   ),
-                  alignment: Alignment.center,
                 ),
                 const SizedBox(
                   width: 24,
@@ -173,10 +187,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
           ),
           TextFormField(
             controller: _passwordTextEdit,
+            obscureText: true,
             decoration: inputDecoration('Password'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your password';
+              } else if (value.length < 8) {
+                return 'Minimum 8 character';
               } else {
                 return null;
               }

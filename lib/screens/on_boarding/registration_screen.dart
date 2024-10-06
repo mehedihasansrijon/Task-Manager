@@ -130,10 +130,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
           TextFormField(
             controller: _passwordTextEdit,
+            obscureText: true,
             decoration: inputDecoration('Password'),
             validator: (value) {
               if (value == null || value.isEmpty) {
                 return 'Please enter your password';
+              } else if (value.length < 8) {
+                return 'Minimum 8 character';
               } else {
                 return null;
               }
@@ -144,10 +147,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
           ),
           TextFormField(
             controller: _cPasswordTextEdit,
+            obscureText: true,
             decoration: inputDecoration('Confirm Password'),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Please confirm your password';
+                return 'Please enter your password';
+              } else if (value.length < 8) {
+                return 'Minimum 8 character';
               } else {
                 return null;
               }
@@ -192,7 +198,9 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
         _isLoading = false;
         setState(() {});
       },
-      child: const Icon(Icons.arrow_forward_ios),
+      child: successButtonChild(
+        const Icon(Icons.arrow_forward_ios),
+      ),
     );
   }
 

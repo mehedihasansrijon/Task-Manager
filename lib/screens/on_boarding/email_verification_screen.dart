@@ -72,8 +72,10 @@ class _EmailVerificationScreenState extends State<EmailVerificationScreen> {
             ElevatedButton(
               style: buttonStyle(),
               onPressed: () => onTapNextButton(),
-              child: const Icon(
-                Icons.arrow_forward_ios,
+              child: successButtonChild(
+                const Icon(
+                  Icons.arrow_forward_ios,
+                ),
               ),
             ),
             const SizedBox(height: 20),

@@ -147,7 +147,9 @@ class _LoginScreenState extends State<LoginScreen> {
             decoration: inputDecoration('Password'),
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Password Required';
+                return 'Please enter your password';
+              } else if (value.length < 8) {
+                return 'Minimum 8 character';
               } else {
                 return null;
               }
